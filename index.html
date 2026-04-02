@@ -1,1 +1,199 @@
+Perfetto! Ora ho tutte le informazioni necessarie. Procedo con la creazione del sito web CreditSolve con:
+- Colori del brand (#FF7A00 arancione e #1F3A68 blu navy)
+- Tutte le pagine richieste
+- Form con integrazione Airtable
+- Design responsive
+- Immagini professionali
 
+Inizio creando la struttura frontend con React Router e i componenti principali:
+Action: file_editor create /app/frontend/src/mock/mockData.js --file-text "// Mock data per CreditSolve
+
+export const services = [
+  {
+    id: 1,
+    title: \"Analisi e ricorsi a cartelle esattoriali\",
+    description: \"Analisi e ricorsi a cartelle esattoriali Equitalia/Agenzia della Riscossione con supporto legale professionale.\",
+    icon: \"FileText\"
+  },
+  {
+    id: 2,
+    title: \"Esdebitazione art. 283 CCII\",
+    description: \"Esdebitazione art. 283 del codice della crisi d'impresa e dell'insolvenza CCII, con procedura legale tramite il tribunale.\",
+    icon: \"Scale\"
+  },
+  {
+    id: 3,
+    title: \"Analisi situazione debitoria\",
+    description: \"Analisi della situazione debitoria complessiva personale e famigliare con consulenza personalizzata.\",
+    icon: \"Search\"
+  },
+  {
+    id: 4,
+    title: \"L.3/2012 Sovraindebitamento\",
+    description: \"L.3/2012 Sovraindebitamento con procedura legale tramite il tribunale per privati e piccole imprese.\",
+    icon: \"Shield\"
+  }
+];
+
+export const howWeWork = [
+  {
+    step: 1,
+    title: \"Appuntamento\",
+    description: \"Fisseremo un incontro presso l'ufficio situato nella zona di riferimento dell'interessato, dove sarà ricevuto da un Professionista del nostro Staff CreditSolve.\"
+  },
+  {
+    step: 2,
+    title: \"Preventivo\",
+    description: \"Formuliamo un preventivo personalizzato, con la possibilità di pagare sempre a rate — rate flessibili e sostenibili — per venire incontro alle esigenze della nostra clientela, spesso già in situazioni economicamente delicate.\"
+  },
+  {
+    step: 3,
+    title: \"Incarico\",
+    description: \"Il primo incontro è completamente gratuito. Al termine del colloquio, il cliente potrà valutare con calma se conferire allo Studio CreditSolve l'incarico per la propria difesa.\"
+  }
+];
+
+export const blogPosts = [
+  {
+    id: 1,
+    title: \"Rottamazione Quinques\",
+    date: \"25.11.2025\",
+    excerpt: \"🇮🇹 Rottamazione-Quinques 2025: cos'è, quali debiti rientrano e come funziona il pagamento a rate\",
+    content: \"La Rottamazione-Quinques 2025 rappresenta una nuova opportunità per i contribuenti di regolarizzare la propria posizione con il Fisco...\"
+  },
+  {
+    id: 2,
+    title: \"Art. 283 del codice della crisi d'impresa e dell'insolvenza\",
+    date: \"24.11.2025\",
+    excerpt: \"L'articolo di legge che disciplina l'istituto della Esdebitazione in ambito di sovraindebitamento dei privati è l'art. 283 del Codice della crisi d'impresa e dell'insolvenza (CCII)\",
+    content: \"L'articolo 283 del CCII rappresenta uno strumento fondamentale per chi si trova in una situazione di sovraindebitamento...\"
+  },
+  {
+    id: 3,
+    title: \"Legge 3/2012 \\"legge salva suicidi\\"\",
+    date: \"24.11.2025\",
+    excerpt: \"Legge 3/2012: come funziona la legge \\"salva suicidi\\" e perché può aiutare chi è indebitato\",
+    content: \"La Legge 3/2012, comunemente nota come 'legge salva suicidi', offre una via d'uscita concreta per chi è oberato dai debiti...\"
+  },
+  {
+    id: 4,
+    title: \"Impugnazione e sgravio cartelle esattoriali\",
+    date: \"24.11.2025\",
+    excerpt: \"Sgravio e impugnazione delle cartelle esattoriali: come tutelarsi\",
+    content: \"Le cartelle esattoriali possono essere impugnate quando presentano vizi formali o sostanziali...\"
+  }
+];
+
+export const contactInfo = {
+  address: \"Via Monte Grappa, 3 - 25038 Rovato (BS)\",
+  phone1: \"+39 030 7995175\",
+  phone2: \"800 200 054\",
+  email: \"info@creditsolve.it\"
+};
+
+export const serviceTypes = [
+  { value: \"\", label: \"Seleziona un servizio\" },
+  { value: \"Cartelle Esattoriali\", label: \"Cartelle Esattoriali\" },
+  { value: \"Esdebitazione\", label: \"Esdebitazione\" },
+  { value: \"Sovraindebitamento\", label: \"Sovraindebitamento\" },
+  { value: \"Consulenza Generale\", label: \"Consulenza Generale\" },
+  { value: \"Altro\", label: \"Altro\" }
+];
+"
+Observation: Create successful: /app/frontend/src/mock/mockData.js
+
+Action: file_editor create /app/frontend/src/components/Footer.jsx --file-text "import React from 'react';
+import { Link } from 'react-router-dom';
+import { Phone, Mail, MapPin, Facebook, Linkedin, Instagram } from 'lucide-react';
+
+const Footer = () => {
+  return (
+    <footer className=\"footer\">
+      <div className=\"container\">
+        <div className=\"footer-content\">
+          {/* Company Info */}
+          <div className=\"footer-column\">
+            <img 
+              src=\"https://customer-assets.emergentagent.com/job_debt-solution-pro/artifacts/kw90ew9s_FullLogo%20%282%29.png\" 
+              alt=\"CreditSolve\" 
+              className=\"footer-logo\"
+            />
+            <p className=\"footer-description\">
+              Un supporto concreto da oltre 20 anni per liberarti dai debiti, rinegoziare, dilazionare o sgravare le cartelle.
+            </p>
+            <div className=\"social-links\">
+              <a href=\"#\" aria-label=\"Facebook\" className=\"social-link\">
+                <Facebook size={20} />
+              </a>
+              <a href=\"#\" aria-label=\"LinkedIn\" className=\"social-link\">
+                <Linkedin size={20} />
+              </a>
+              <a href=\"#\" aria-label=\"Instagram\" className=\"social-link\">
+                <Instagram size={20} />
+              </a>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div className=\"footer-column\">
+            <h3 className=\"footer-title\">Link Rapidi</h3>
+            <ul className=\"footer-links\">
+              <li><Link to=\"/\">Home</Link></li>
+              <li><Link to=\"/chi-siamo\">Chi Siamo</Link></li>
+              <li><Link to=\"/servizi\">Servizi</Link></li>
+              <li><Link to=\"/come-operiamo\">Come Operiamo</Link></li>
+              <li><Link to=\"/blog\">Blog</Link></li>
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div className=\"footer-column\">
+            <h3 className=\"footer-title\">I Nostri Servizi</h3>
+            <ul className=\"footer-links\">
+              <li><Link to=\"/servizi\">Cartelle Esattoriali</Link></li>
+              <li><Link to=\"/servizi\">Esdebitazione</Link></li>
+              <li><Link to=\"/servizi\">Sovraindebitamento</Link></li>
+              <li><Link to=\"/servizi\">Consulenza</Link></li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div className=\"footer-column\">
+            <h3 className=\"footer-title\">Contatti</h3>
+            <ul className=\"footer-contact\">
+              <li>
+                <MapPin size={18} />
+                <span>Via Monte Grappa, 3<br />25038 Rovato (BS)</span>
+              </li>
+              <li>
+                <Phone size={18} />
+                <div>
+                  <a href=\"tel:+390307995175\">+39 030 7995175</a>
+                  <a href=\"tel:800200054\">800 200 054</a>
+                </div>
+              </li>
+              <li>
+                <Mail size={18} />
+                <a href=\"mailto:info@creditsolve.it\">info@creditsolve.it</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className=\"footer-bottom\">
+          <p>&copy; {new Date().getFullYear()} CreditSolve - Albita International S.r.l. Tutti i diritti riservati.</p>
+          <div className=\"footer-bottom-links\">
+            <Link to=\"/privacy\">Privacy Policy</Link>
+            <Link to=\"/cookie\">Cookie Policy</Link>
+            <Link to=\"/termini\">Termini e Condizioni</Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+"
+Observation: Create successful: /app/frontend/src/components/Footer.jsx
